@@ -1,11 +1,13 @@
+import { Title } from "../../App.styled";
 import ContactsItem from "../ContactsItem/ContactsItem";
+import { ContactUl } from "./ContactsList.styled";
 
 const ContactsList = ({ contacts, deleteContact }) => {
   return (
     <>
-      <h2>Contacts</h2>
+      {/* <Title>Contacts</Title> */}
       {contacts.length ? (
-        <ul>
+        <ContactUl>
           {contacts.map((contact) => (
             <ContactsItem
               contact={contact}
@@ -13,7 +15,7 @@ const ContactsList = ({ contacts, deleteContact }) => {
               deleteContact={deleteContact}
             />
           ))}
-        </ul>
+        </ContactUl>
       ) : (
         <>contacts is empty</>
       )}

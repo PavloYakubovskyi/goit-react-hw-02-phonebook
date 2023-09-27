@@ -1,16 +1,17 @@
 import { AiFillDelete } from "react-icons/ai";
+import { ContactBtn, ContactLi } from "../ContactsList/ContactsList.styled";
 
 const ContactsItem = ({ contact, deleteContact }) => {
   const { id, name, number } = contact;
   return (
     <>
-      <li key={id}>
+      <ContactLi key={id}>
         <span>{name}</span>
         <span>{number}</span>
-        <button onClick={() => deleteContact(id)}>
+        <ContactBtn onClick={() => deleteContact(id)}>
           <AiFillDelete />
-        </button>
-      </li>
+        </ContactBtn>
+      </ContactLi>
     </>
   );
 };

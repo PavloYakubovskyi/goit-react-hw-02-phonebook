@@ -1,8 +1,11 @@
+import { FilterInput, FilterLabel, FilterSpan } from "./ContactsFilter.styled";
+
 const ContactsFilter = ({ inputValue, handleChange }) => {
   return (
-    <>
-      <input type="text" value={inputValue} onChange={handleChange} />
-    </>
+    <FilterLabel>
+      <FilterSpan>Find contacts by name</FilterSpan>
+      <FilterInput type="text" value={inputValue} onChange={handleChange} />
+    </FilterLabel>
   );
 };
 

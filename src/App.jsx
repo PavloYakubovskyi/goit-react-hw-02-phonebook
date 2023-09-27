@@ -1,9 +1,10 @@
 import { Component } from "react";
-import "./App.css";
+import "./App.styled.jsx";
 import ContactForm from "./components/ContactsForm/ContactsForm";
 import ContactsList from "./components/ContactsList/ContactsList";
 import { nanoid } from "nanoid";
 import ContactsFilter from "./components/ContactsFilter/ContactsFilter";
+import { Container, SubTitle, Title } from "./App.styled.jsx";
 
 class App extends Component {
   state = {
@@ -53,10 +54,10 @@ class App extends Component {
 
   render() {
     return (
-      <>
-        <h1>Phonebook</h1>
+      <Container>
+        <Title>Phonebook</Title>
         <ContactForm addContact={this.addContact} />
-        <h2>Contacts</h2>
+        <SubTitle>Contacts</SubTitle>
         <ContactsFilter
           inputValue={this.state.filter}
           handleChange={this.handleFilterChange}
@@ -65,7 +66,7 @@ class App extends Component {
           contacts={this.filteredContacts()}
           deleteContact={this.handleDeleteContact}
         />
-      </>
+      </Container>
     );
   }
 }
