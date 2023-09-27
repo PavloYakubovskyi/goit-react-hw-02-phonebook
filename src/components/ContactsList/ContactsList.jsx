@@ -1,14 +1,17 @@
-const ContactsList = ({ contacts }) => {
+import ContactsItem from "../ContactsItem/ContactsItem";
+
+const ContactsList = ({ contacts, deleteContact }) => {
   return (
     <>
       <h2>Contacts</h2>
       {contacts.length ? (
         <ul>
           {contacts.map((contact) => (
-            <li key={contact.id}>
-              <span>{contact.name}</span>
-              <span>{contact.number}</span>
-            </li>
+            <ContactsItem
+              contact={contact}
+              key={contact.id}
+              deleteContact={deleteContact}
+            />
           ))}
         </ul>
       ) : (

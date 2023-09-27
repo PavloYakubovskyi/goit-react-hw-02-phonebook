@@ -3,16 +3,51 @@ import "./App.css";
 import ContactForm from "./components/ContactsForm/ContactsForm";
 import ContactsList from "./components/ContactsList/ContactsList";
 import { nanoid } from "nanoid";
+import ContactsFilter from "./components/ContactsFilter/ContactsFilter";
 
 class App extends Component {
-  state = { contacts: [], name: "", number: "" };
+  state = {
+    contacts: [
+      { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+      { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+      { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+      { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+    ],
+    filter: "",
+  };
 
   addContact = (name, number) => {
     // console.log(name);
+    if (
+      this.state.contacts.some(
+        (contact) => contact.name.toLowerCase() === name.toLowerCase()
+      )
+    ) {
+      return alert(`${name} is already in contacts`);
+    }
+
     const newContact = { id: nanoid(), name, number };
     console.log(newContact);
     this.setState((prevState) => ({
       contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
+  handleFilterChange = (evt) => {
+    this.setState({ filter: evt.currentTarget.value });
+  };
+
+  filteredContacts = () => {
+    const { contacts, filter } = this.state;
+
+    return contacts.filter((contact) =>
+      contact.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  handleDeleteContact = (id) => {
+    this.setState((prevState) => ({
+      contacts: prevState.contacts.filter((contact) => contact.id !== id),
     }));
   };
 
@@ -21,7 +56,15 @@ class App extends Component {
       <>
         <h1>Phonebook</h1>
         <ContactForm addContact={this.addContact} />
-        <ContactsList contacts={this.state.contacts} />
+        <h2>Contacts</h2>
+        <ContactsFilter
+          inputValue={this.state.filter}
+          handleChange={this.handleFilterChange}
+        />
+        <ContactsList
+          contacts={this.filteredContacts()}
+          deleteContact={this.handleDeleteContact}
+        />
       </>
     );
   }
